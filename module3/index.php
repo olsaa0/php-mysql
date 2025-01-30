@@ -34,4 +34,13 @@ switch('$day'){
             break;
 }
 
+for($number=51, $number<=100, $number+2){
+    echo '$number';
+}
+
+$students = ['A, B, C, D, E, F'];
+foreach($students as $student){
+    echo '$student';
+}
+
 ?>

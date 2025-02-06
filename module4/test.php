@@ -28,3 +28,14 @@ $things_slice = array_slice($things, 1);
 print_r($things_slice);
 
 
+function getAverage($array) {
+    return array_sum($array) / count($array);
+}
+
+$arr = [10, 20, 30, 40, 50];
+$average = getAverage($arr);
+
+echo "The average is: " . $average;
+
+?>
+

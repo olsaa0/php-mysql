@@ -6,13 +6,13 @@ if($point>=90){
 elseif($point<90 && $point>=80){
     echo '4';
 }
-elseif($point<90 && $point>=80){
+elseif($point<80 && $point>=60){
     echo '3';
 }
-elseif($point<90 && $point>=80){
+elseif($point<60 && $point>=40){
     echo '2';
 }
-elseif($point<90 && $point>=80){
+elseif($point<40 && $point>=10){
     echo '1';
 }  
 

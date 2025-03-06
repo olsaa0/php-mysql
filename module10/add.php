@@ -2,14 +2,14 @@
 require('config.php');
 if(isset($_POST['submit'])){
     $name = $_POST['name'];
-    $username = $_POST['username'];
+    $surname = $_POST['surname'];
     $email = $_POST['email'];
 
-    $sql = "INSERT INTO users(name, username, email) VALUES(:name, :username, :email)";
+    $sql = "INSERT INTO users(name, surname, email) VALUES(:name, :surname, :email)";
 
-    $sqlQuery = $conn->prepare($sql);
+    $sqlQuery = $connection->prepare($sql);
     $sqlQuery->bindParam(':name', $name);
-    $sqlQuery->bindParam(':username', $username);
+    $sqlQuery->bindParam(':surname', $surname);
     $sqlQuery->bindParam(':email', $email);
 
     $sqlQuery->execute();

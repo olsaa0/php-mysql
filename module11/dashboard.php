@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>lesson10</title>
+    <title>lesson11</title>
     <style>
         table,td,th{
             border: 1px solid black;
@@ -28,6 +28,7 @@
             <th>Name</th>
             <th>Surname</th>
             <th>email</th>
+            <th>age</th>
     </thead>
     <tbody>
         <?php
@@ -38,6 +39,7 @@
                 <td><?= $user['name']?></td>
                 <td><?= $user['surname']?></td>
                 <td><?= $user['email']?></td>
+                <td><?= $user['age']?></td>
         </tr>
         <?php
         }

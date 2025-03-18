@@ -14,6 +14,8 @@
 <input type="text"  name="username"><br>
 <label for="email">email:</label>
 <input type="text"  name="email"><br>
+<label for="email">age:</label>
+<input type="number"  name="age"><br>
 <input type="submit" value="submit">
 </body>
 </html>

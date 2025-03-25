@@ -1,7 +1,7 @@
 <?php
 include_once("config.php");
 
-$id = 1;
+$id = $_GET['id'];
 
 $sql = "DELETE FROM users WHERE id=:id";
 $deleteUsers = $conn->preprae($sql);

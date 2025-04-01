@@ -6,15 +6,15 @@ if(isset($_POST('submit'))){
     $username=$_POST('username');
     $email=$_POST('email');
     $tempPass=$_POST('password');
-    $password=password_hash(password: $tempPass,algo: PASSWORD_DEAFULT);
+    $password=password_hash($tempPass,algo: PASSWORD_DEAFULT);
 
     if(empty($name)) || empty($surname)|| empty($username)|| empty($email)|| empty($password){
         echo 'you need to fill all the fields';
     }else{
         $sql = 'SELECT username FROM users WHERE username=:username';
 
-        $tempSQL=$conn->prepare(query: $sql);
-        $tempSQL->bindParam(param: ':username', var &$username);
+        $tempSQL=$conn->prepare($sql);
+        $tempSQL->bindParam(':username', $username);
         $tempSQL->execute();
        }
 }

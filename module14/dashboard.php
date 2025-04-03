@@ -36,6 +36,16 @@ $users_data = $selectUsers->fetchAll();
     </li>
     </ul>
     </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <ul class="sidebar-sticy">
+                    <li><a href=""></a></li>
+                    <li><a href=""></a></li>
+    </ul>
+    </nav>
+    </div>
+    </div>
 
     <?php
     include_once('config.php');

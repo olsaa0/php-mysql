@@ -37,3 +37,6 @@ CREATE TABLE `bookings`(
     `is_approved` varchar(255) NOT NULL,
     `time` varchar(255)
     )
+
+
+INSERT INTO `bookings` (`user_id`,`movie_id`,`nr_tickets`,`date`,`is_approved`,`time`) VALUES (1,1,2,'2025-12-16','true','19:00');

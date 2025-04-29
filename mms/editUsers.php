@@ -1,18 +1,17 @@
 <?php
 session_start();
+
 include_once('config.php');
 
-if(empty($_SESSION['username'])){
-    header('Location:login.php');
-}
+$id=$_GET['id'];
+$sql="SELECT * FROM users WHERE id=:id";
 
-$sql="SELECT * FROM users";
-$selectUsers=$conn->prepare();
-$selectUsers->execute();
+$selectUser=$conn->prepare($sql);
+$selectUser->bindParam(':id', $id);
+$selectUser->execute();
 
-$users_data=$selectUsers->fetchAll();
+$user_data=$selectUser->fetch();
 ?>
-
 
 <!DOCTYPE html>
  <html>
@@ -52,37 +51,16 @@ $users_data=$selectUsers->fetchAll();
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
-
-        <li class="nav-item">
-              <a class="nav-link" href="home.php">
-                <span data-feather="file"></span>
-                Home
-              </a>
-            </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="dashboard.php">
               <span data-feather="home"></span>
               Dashboard
             </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="list_movies.php">
-              <span data-feather="file"></span>
-              Movies
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="bookings.php">
-              <span ></span>
-              Bookings
-            </a>
-          </li>
-        </ul>
 
-        
+            </ul>
 
 
-        
+       
       </div>
     </nav>
 
@@ -90,34 +68,48 @@ $users_data=$selectUsers->fetchAll();
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Dashboard</h1>
-        
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+          </button>
+        </div>
       </div>
 
-      <h2>Users</h2>
+
+    
+
+
+      <h2>Edit user's details</h2>
       <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th scope="col">Id</th>
-              <th scope="col">Emri</th>
-              <th scope="col">Username</th>
-              <th scope="col">Email</th>
-              <th scope="col">Update</th>
-              <th scope="col">Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php foreach($users_data as $user_data){?>}
+        
+        <form action="updateUsers.php" method="post">
 
-          <?php  } ?>
-           
-            
-          </tbody>
-        </table>
+        <div class="form-floating">
+          <input type="number" class="form-control" id="floatingInput" placeholder="Id" name="id" value="<?php echo  $user_data['id'] ?>">
+          <label for="floatingInput">Id</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="floatingInput" placeholder="Emri" name="emri" value="<?php echo  $user_data['emri'] ?>">
+          <label for="floatingInput">Emri</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username" value="<?php echo  $user_data['username'] ?>">
+          <label for="floatingInput">Username</label>
+        </div>
+        <div class="form-floating">
+          <input type="email" class="form-control" id="floatingInput" placeholder="Email" name="email" value="<?php echo  $user_data['email'] ?>">
+          <label for="floatingInput">Email</label>
+        </div>
+
+        <br>
+        <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Change</button>
+      </form>
       </div>
-     <?php  } else {
-      
-    } ?>
     </main>
   </div>
 </div>

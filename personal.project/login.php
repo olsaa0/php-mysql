@@ -79,26 +79,21 @@
 <body>
 
     <div class="signup-container">
-        <h2>Library Sign-Up</h2>
+        <h2>Library Sign-in</h2>
         <form action="#" method="POST">
-            <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name">
-            </div>
+            
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username">
             </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email">
-            </div>
+            
+            
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" name="password">
             </div>
-            <button type="submit" class="btn btn-primary w-100">Sign Up</button>
-            <span>Already have an account: </span><a href="login.php">Sign in</a>
+            <button type="submit" class="btn btn-primary w-100">Sign In</button>
+            <p>Don't have an account:  <a href="signup.php" >Sign up</a> </p>
         </form>
     </div>
 

@@ -80,21 +80,27 @@
 
     <div class="signup-container">
         <h2>Library Sign-in</h2>
-        <form action="#" method="POST">
-            
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" name="username">
-            </div>
-            
-            
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password">
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Sign In</button>
-            <p>Don't have an account:  <a href="signup.php" >Sign up</a> </p>
-        </form>
+        <form action="loginLogic.php" method="post">
+    <img class="mb-4" src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username">
+      <label for="floatingInput">Username</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Sign in</button>
+	<p>Already have an account:<a href="index.php" >Sign up</a> </p>
+  </form>
     </div>
 
     <!-- Bootstrap JS Bundle -->

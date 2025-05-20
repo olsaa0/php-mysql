@@ -27,7 +27,7 @@
 		else{
 
 			//If false, we will create a query to select id,emri,username,email,password,is_admin from users table based on each username
-			$sql = "SELECT id, name, username, email, password  FROM users WHERE username=:username";
+			$sql = "SELECT id, emri, username, email, password, is_admin FROM users WHERE username=:username";
 
 			//We use prepared statement as a feature used to execute the same sql statement repeatedly with high efficiency
 			$selectUser = $conn->prepare($sql);
@@ -61,7 +61,7 @@
 					$_SESSION['id'] = $data['id'];
 					$_SESSION['username'] = $data['username'];
 					$_SESSION['email'] = $data['email'];
-					$_SESSION['name'] = $data['name'];
+					$_SESSION['emri'] = $data['emri'];
 					$_SESSION['is_admin'] = $data['is_admin'];
 
 					//And head to dashboard.php

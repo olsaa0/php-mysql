@@ -81,7 +81,7 @@
     <div class="signup-container">
         <h2>Library Sign-Up</h2>
         <form action="register.php" method="post">
-    <img class="mb-4" src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    <img  src="image/logo.jpg" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Register</h1>
 
     <div class="form-floating">

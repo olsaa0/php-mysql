@@ -79,9 +79,11 @@
 <body>
 
     <div class="signup-container">
+        
         <h2>Library Sign-in</h2>
+        <img  src="image/logo.jpg" alt="" width="72" height="57">
         <form action="loginLogic.php" method="post">
-    <img class="mb-4" src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
     <div class="form-floating">
@@ -99,7 +101,7 @@
       </label>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Sign in</button>
-	<p>Already have an account:<a href="index.php" >Sign up</a> </p>
+	<p>Already have an account:<a href="signup.php" >Sign up</a> </p>
   </form>
     </div>
 

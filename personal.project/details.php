@@ -1,121 +1,187 @@
 <?php 
-  /*Creating a session  based on a session identifier, passed via a GET or POST request.
-  We will include config.php for connection with database.
-  We will get the data of films from database based on each films ids.
-  Creating a form which will post some of those datas into book.php file
-  */
-	session_start();
-  
-   include_once('config.php');
-   $id = $_GET['id'];
-   $_SESSION['book_id'] = $id;
-   $sql = "SELECT * FROM books WHERE id=:id";
-   $selectBook = $conn->prepare($sql);
-   $selectBook->bindParam(":id",$id);
-   $selectBook->execute();
-   $book_data = $selectBook->fetch();
+  session_start();
+  include_once('config.php');
+
+  $id = $_GET['id'];
+  $_SESSION['book_id'] = $id;
+
+  $sql = "SELECT * FROM books WHERE id=:id";
+  $selectBook = $conn->prepare($sql);
+  $selectBook->bindParam(":id", $id);
+  $selectBook->execute();
+  $book_data = $selectBook->fetch();
 ?>
 
- <!DOCTYPE html>
- <html>
- <head>
- 	<title>Home</title>
- 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
- 	 <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.88.1">
-  	<link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-	<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-	<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-	<link rel="manifest" href="/docs/5.1/assets/img/favicons/manifest.json">
-	<link rel="mask-icon" href="/docs/5.1/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
-	<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon.ico">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-	<meta name="theme-color" content="#7952b3">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Borrow Book - <?php echo htmlspecialchars($book_data['book_title']); ?></title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
   <style>
-    .form-floating{
-      margin: 20px 0;
+    body {
+      background: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    header .navbar {
+      background-color: #343a40;
+    }
+
+    header .navbar-brand strong {
+      color: #ffc107;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    .borrow-section {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgb(0 0 0 / 0.1);
+    }
+
+    .book-image {
+      width: 100%;
+      max-width: 350px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgb(0 0 0 / 0.1);
+      object-fit: cover;
+    }
+
+    h3.book-title {
+      font-weight: 700;
+      color: #343a40;
+      margin-bottom: 15px;
+    }
+
+    p.book-desc {
+      font-size: 1.05rem;
+      color: #6c757d;
+      margin-bottom: 30px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #495057;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 12px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+    /* Floating labels style tweaks */
+    .form-floating > label {
+      padding-left: 0.75rem;
+      color: #6c757d;
+      font-weight: 500;
+    }
+
+    /* Select inside form-floating fix */
+    .form-floating select.form-select {
+      padding-top: 1.625rem;
+      padding-bottom: 0.625rem;
+      height: calc(3.5rem + 2px);
     }
   </style>
- </head>
- <body>
+</head>
+<body>
 
- 	<header>
-    <div class="collapse bg-dark" id="navbarHeader">
-     <div class="container">
-        <div class="row">
-            <div class="col-sm-8 col-md-7 py-4">
-                <h4 class="text-white">About</h4>
-                <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
-            </div>
-            <div class="col-sm-4 offset-md-1 py-4">
-              <h4 class="text-white">Contact</h4>
-              <ul class="list-unstyled">
-                <li><a href="#" class="text-white">Follow on Twitter</a></li>
-                <li><a href="#" class="text-white">Like on Facebook</a></li>
-                <li><a href="#" class="text-white">Email me</a></li>
-              </ul>
-            </div>
-      </div>
-    </div>
-  </div>
-  <div class="navbar navbar-dark bg-dark shadow-sm">
+<header>
+  <nav class="navbar navbar-dark shadow-sm">
     <div class="container">
       <a href="#" class="navbar-brand d-flex align-items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="me-2" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+          <circle cx="12" cy="13" r="4"/>
+        </svg>
         <strong>Borrow</strong>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    </div>
+  </nav>
+</header>
+
+<section class="text-center mt-5 mb-4">
+  <div class="container">
+    <h1 class="display-5 fw-bold text-secondary">Borrow a Book</h1>
+    <p class="lead text-muted">Reserve your favorite book by filling the form below.</p>
+  </div>
+</section>
+
+<div class="borrow-section shadow-sm">
+  <div class="row g-4 align-items-center">
+    <div class="col-md-5 text-center">
+      <img src="movie_images/<?php echo htmlspecialchars($book_data['book_image']); ?>" alt="Book Image" class="book-image" />
+    </div>
+    <div class="col-md-7">
+      <h3 class="book-title"><?php echo htmlspecialchars($book_data['book_title']); ?></h3>
+      <p class="book-desc"><?php echo htmlspecialchars($book_data['book_desc']); ?></p>
+
+      <form action="borrowing.php" method="post" novalidate>
+        <div class="form-floating mb-3">
+          <input type="date" class="form-control" id="borrowDate" name="borrow_date" required />
+          <label for="borrowDate">Borrow Date</label>
+          <div class="invalid-feedback">Please select a borrow date.</div>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="date" class="form-control" id="returnDate" name="return_date" required />
+          <label for="returnDate">Return Date</label>
+          <div class="invalid-feedback">Please select a return date.</div>
+        </div>
+
+        <div class="form-floating mb-4">
+          <select class="form-select" id="borrowTime" name="time" required>
+            <option value="" disabled selected>Select Time</option>
+            <option value="12:00">12:00</option>
+            <option value="15:00">15:00</option>
+            <option value="17:00">17:00</option>
+            <option value="19:00">19:00</option>
+          </select>
+          <label for="borrowTime">Borrow Time</label>
+          <div class="invalid-feedback">Please select a time.</div>
+        </div>
+
+        <button class="btn btn-primary w-100 btn-lg" type="submit" name="submit">Borrow Now</button>
+      </form>
     </div>
   </div>
-</header>
- 
- 	<section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Book your ticket</h1>
-        <p class="lead text-muted">You can borrow your book down below</p>
-      </div>
-    </div>
-  </section>
+</div>
 
-  <div class="album py-5 bg-light">
-    <div class="container">
-      <div class="container">
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-lg-5 col-md-5 col-sm-6">
-                    <div class="white-box text-center" style="width: 100%;height: 100%;"><img src="movie_images/<?php echo $book_data['book_image'];  ?>" class="img-responsive" style="width: 70%; height: 90%;"></div>
-                </div>
-                <div class="col-lg-7 col-md-7 col-sm-6">
-                    <h4 class="box-title mt-5"><?php echo $book_data['book_title']; ?></h4>
-                    <p><?php echo $book_data['book_desc']; ?></p>
-                    <form action="borrowing.php" method="post">
-                    <div class="form-floating">
-                      <input type="date" class="form-control" id="floatingInput" placeholder="Borrow date" name="borrow_date" >
-                      <label for="floatingInput">Borrow date</label>
-                    </div>
-                    <div class="form-floating">
-                      <input type="date" class="form-control" id="floatingInput" placeholder="Return date" name="return_date" >
-                      <label for="floatingInput">Return date</label>
-                    </div>
-                    <div class="form-floating">
-                      <select name="time">
-                        <option value="12:00">12:00</option>
-                        <option value="15:00">15:00</option>
-                        <option value="17:00">17:00</option>
-                        <option value="19:00">19:0</option>
-                      </select>
-                    </div>
-                    <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Borrow</button>
-                  </form>
-                </div>
-            </div>
-        </div>
-    </div>
- </body>
- </html>
+<!-- Bootstrap JS & validation script -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Bootstrap validation
+  (() => {
+    'use strict'
+    const forms = document.querySelectorAll('form')
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
+</script>
+
+</body>
+</html>

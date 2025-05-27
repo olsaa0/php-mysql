@@ -1,46 +1,93 @@
 <?php 
- /*
-  We will include config.php for connection with database.
-  We will fetch all datas from movies in database and show them.
-  */
-	
    include_once('config.php');
-
    $sql = "SELECT * FROM books";
    $selectMovies = $conn->prepare($sql);
    $selectMovies->execute();
    $books_data = $selectMovies->fetchAll();
+?>
 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.88.1">
+  <meta name="theme-color" content="#7952b3">
 
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+    }
 
- ?>
+    .navbar-dark {
+      background-color: #343a40;
+    }
 
- <!DOCTYPE html>
- <html>
- <head>
- 	<title>Home</title>
- 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
- 	 <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.88.1">
-  	<link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-	<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-	<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-	<link rel="manifest" href="/docs/5.1/assets/img/favicons/manifest.json">
-	<link rel="mask-icon" href="/docs/5.1/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
-	<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon.ico">
-	<meta name="theme-color" content="#7952b3">
- </head>
- <body>
+    .navbar-brand svg {
+      margin-right: 8px;
+    }
 
- 	<header>
+    .fw-light {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    .lead {
+      font-size: 1.2rem;
+    }
+
+    .card {
+      border: none;
+      border-radius: 15px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      height: 350px;
+      object-fit: cover;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+
+    .card-body h4 {
+      font-weight: 600;
+    }
+
+    .btn-group .btn {
+      margin-right: 5px;
+    }
+
+    .text-muted {
+      font-size: 0.85rem;
+    }
+
+    footer {
+      background: #343a40;
+      color: #fff;
+      padding: 1.5rem 0;
+      text-align: center;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
   <div class="collapse bg-dark" id="navbarHeader">
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
           <h4 class="text-white">About</h4>
-          <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+          <p class="text-muted">Add your preferred books, manage your collection, and enjoy reading anytime.</p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
           <h4 class="text-white">Contact</h4>
@@ -53,70 +100,72 @@
       </div>
     </div>
   </div>
+
   <div class="navbar navbar-dark bg-dark shadow-sm">
     <div class="container">
       <a href="#" class="navbar-brand d-flex align-items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+             stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="me-2" viewBox="0 0 24 24">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+          <circle cx="12" cy="13" r="4"/>
+        </svg>
         <strong>Library</strong>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-        <a href="dashboard.php"><span class="navbar-toggler-icon"></span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
+              aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
     </div>
   </div>
 </header>
- 
- 	<section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Album example</h1>
-        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-        </p>
-      </div>
+
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">*Library*</h1>
+      <p class="lead text-muted">Add your preferred books to read and enjoy!</p>
+      <p>
+        <a href="#" class="btn btn-primary my-2">Books</a>
+        <a href="#" class="btn btn-outline-secondary my-2">Borrow</a>
+      </p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="album py-5 bg-light">
-    <div class="container">
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
-      	<?php foreach ($books_data as $book_data) { ?>
-
-      	<div class="col">
-          <div class="card shadow-sm">
-
-            <img src="image/achille.png <?php echo $book_data['book_image'];  ?>" height="350">
-
-            <div class="card-body">
+      <?php foreach ($books_data as $book_data) { ?>
+        <div class="col">
+          <div class="card h-100">
+            <img src="image/<?php echo $book_data['book_image']; ?>" class="card-img-top" alt="Book Cover">
+            <div class="card-body d-flex flex-column">
               <h4><?php echo $book_data['book_title']; ?></h4>
               <p class="card-text"><?php echo $book_data['book_desc']; ?></p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a href="details.php?id=<?php echo $book_data['id']; ?>"  class="btn btn-sm btn-outline-secondary" >View</a>
-                  <a href="edit.php?id=<?php echo $book_data['id']; ?>"  class="btn btn-sm btn-outline-secondary">Edit</a>
+              <div class="mt-auto">
+                <div class="btn-group mb-2">
+                  <a href="details.php?id=<?php echo $book_data['id']; ?>" class="btn btn-sm btn-outline-primary">View</a>
+                  <a href="edit.php?id=<?php echo $book_data['id']; ?>" class="btn btn-sm btn-outline-secondary">Edit</a>
                 </div>
-                <small class="text-muted">Book genre: <?php echo $book_data['book_genre']; ?></small>
-                <small class="text-muted"><?php echo $book_data['year_published']; ?></small>
+                <small class="text-muted d-block">Genre: <?php echo $book_data['book_genre']; ?></small>
+                <small class="text-muted">Published: <?php echo $book_data['year_published']; ?></small>
               </div>
             </div>
           </div>
         </div>
-      		
-      <?php	} ?>
-   
-       
+      <?php } ?>
 
-        
-      </div>
     </div>
   </div>
+</div>
 
-  
+<footer>
+  <div class="container">
+    <p class="mb-0">© 2025 Library Web App. All rights reserved.</p>
+  </div>
+</footer>
 
-
- </body>
- </html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

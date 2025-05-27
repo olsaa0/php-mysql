@@ -10,10 +10,10 @@
    $id = $_GET['id'];
    $_SESSION['book_id'] = $id;
    $sql = "SELECT * FROM books WHERE id=:id";
-   $selectMovie = $conn->prepare($sql);
-   $selectMovie->bindParam(":id",$id);
-   $selectMovie->execute();
-   $movie_data = $selectMovie->fetch();
+   $selectBook = $conn->prepare($sql);
+   $selectBook->bindParam(":id",$id);
+   $selectBook->execute();
+   $book_data = $selectBook->fetch();
 ?>
 
  <!DOCTYPE html>

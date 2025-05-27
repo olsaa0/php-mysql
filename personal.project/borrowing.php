@@ -9,14 +9,13 @@
 
 	//Getting values 'id' and 'movie_id' using $_SESSION
 	$user_id = $_SESSION['id'];
-    $borrow_id = $_SESSION['borrow_id'];
+    $book_id = $_SESSION['book_id'];
 
 	//Getting some of data from details.php form
 	$borrow_date = $_POST['borrow_date'];
 	$return_date = $_POST['return_date'];
-	$time = $_POST['time'];
 	//Inserting the new data into database
-	$sql = "INSERT INTO borrowings(user_id, book_id, borrow_date, return_date, time) VALUES (:user_id, :book_id, :borrow_date, :return_date, :time)";
+	$sql = "INSERT INTO borrowings(user_id, book_id, borrow_date, return_date) VALUES (:user_id, :book_id, :borrow_date, :return_date)";
 
 	$insertBorrowing = $conn->prepare($sql);
 
@@ -24,9 +23,8 @@
 	$insertBorrowing->bindParam(":book_id", $book_id);
 	$insertBorrowing->bindParam(":borrow_date", $borrow_date);
 	$insertBorrowing->bindParam(":return_date", $return_date);
-	$insertBorrowing->bindParam(":time", $time);
 
-	$insertBooking->execute();
+	$insertBorrowing->execute();
 
 	header("Location: home.php");
 
